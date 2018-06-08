@@ -1,0 +1,21 @@
+{
+  "name": "cbpc3years",
+  "version": "1.0.0",
+  "description": "cbpc 3 years anniversary",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "parcel build --public-url ./",
+    "start": "parcel index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/realeve/cbpc3years.git"
+  },
+  "author": "realeve@qq.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/realeve/cbpc3years/issues"
+  },
+  "homepage": "https://github.com/realeve/cbpc3years#readme"
+}

@@ -33,7 +33,7 @@ function initCandle() {
   candle($("#surface3")[0]);
 }
 
-function initThree() {
+function initPage1() {
   setTimeout(function () {
     $('.three').parent().removeClass('bounceInDown').addClass('pulse').css('animation-iteration-count', 'infinite');
     $('.happy').removeClass('bounceInDown').addClass('rubberBand').css({
@@ -70,7 +70,6 @@ function initFullpage() {
       var loadedSlide = $(this);
       if (curIndex == 2) {
         $('.page2').removeClass('hide');
-        initThree();
         initEvent();
       } else if (curIndex == 3) {
         if (!fired) {
@@ -82,6 +81,7 @@ function initFullpage() {
     },
     afterRender: function () {
       initCandle();
+      initPage1()
     },
   });
 }

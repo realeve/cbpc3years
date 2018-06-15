@@ -1,16 +1,20 @@
 import wx from 'weixin-js-sdk';
 import querystring from 'qs';
-import $http from 'vue-resource';
+import {
+  ajax
+} from '../jquery';
 
-const NODE_ENV = 'development';
+let NODE_ENV = 'development';
+
 // const userInfo = {};
 const url = window.location.href.split("#")[0];
 
 let sport = {
-  title: '品质成钞三周年有奖活动(一路相伴，感谢有礼)',
+  title: '品质成钞三周年有奖活动',
+  subTitle: '一路相伴，感谢有礼',
   loadWXInfo: true, // 抽奖活动将载入用户个人信息
   apiId: 'wx762c9153df774440',
-  cdnUrl: "http://cbpc540.applinzi.com/index.php",
+  cdnUrl: "http://cbpc540.applinzi.com/index.php?s=%2Faddon%2FApi%2FApi%2F",
   shareUrl: url.split("?")[0],
   callback: '',
   code: ''
@@ -32,22 +36,26 @@ const needRedirect = () => {
 }
 
 const getWXInfo = () => {
-  let params = {
-    s: "/addon/Api/Api/getUserInfo",
+  let data = {
     code: sport.code
   };
-  $http
-    .jsonp(sport.cdnUrl, {
-      params
-    })
-    .then(res => {
-      if (Reflect.get(res.data, "nickname")) {
-        localStorage.setItem("wx_userinfo", JSON.stringify(res.data));
-      }
-      // 全局存储
-      window._userInfo = res.data;
-      sport.callback();
-    });
+  console.log('code')
+  console.log(data);
+  ajax({
+    url: sport.cdnUrl + "getUserInfo",
+    data,
+    dataType: "jsonp",
+    callback: "JsonCallback",
+  }).done(data => {
+    console.log('userInfo')
+    console.log(data);
+    if (Reflect.get(data, "nickname")) {
+      localStorage.setItem("wx_userinfo", JSON.stringify(data));
+    }
+    // 全局存储
+    window._userInfo = data;
+    sport.callback();
+  });
 }
 
 const getWXUserInfo = () => {
@@ -81,7 +89,7 @@ const initWxShare = () => {
   wx.ready(() => {
     let option = {
       title: sport.title, // 分享标题
-      desc: sport.title,
+      desc: sport.subTitle,
       link: sport.shareUrl,
       imgUrl: "http://cbpm.sinaapp.com/cdn/logo/cbpc.jpg",
       type: "",
@@ -116,32 +124,48 @@ const recordReadNum = () => {
     return;
   }
   let url = window.location.href.split("?")[0];
-  let params = {
-    s: "/addon/Api/Api/recordReadNum",
-    url
-  };
-  $http.jsonp(sport.cdnUrl, {
-    params
-  });
+
+  ajax({
+    url: sport.cdnUrl + "recordReadNum",
+    data: {
+      url
+    },
+    dataType: "jsonp",
+    callback: "JsonCallback",
+  })
 }
 
+const wxPermissionInit = () => {
+  ajax({
+    url: sport.cdnUrl + "getSignature",
+    data: {
+      url
+    },
+    dataType: "jsonp",
+    callback: "JsonCallback",
+    async: false
+  }).done(data => {
+    console.log('signature:')
+    console.log(data)
+    wxReady(data);
+    initWxShare();
+    recordReadNum();
+  })
+}
 
 let wxInit = (callback) => {
   if (sport.loadWXInfo && !needRedirect()) {
     getWXUserInfo(callback);
   }
-  wxPermissionInit().then(res => {
-    // shouldShare = true;
-    wxReady(res);
-    initWxShare();
-    recordReadNum();
-  });
+  wxPermissionInit();
 }
 
 const init = (callback) => {
   // 全局记录callback;
   sport.callback = callback;
   window.title = sport.title;
+  wxInit();
+  return;
 
   if (NODE_ENV == "development") {
     window._userInfo = {

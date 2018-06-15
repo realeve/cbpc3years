@@ -20,22 +20,15 @@ let loadLotteryInfo = () => {
       doLottery();
       return;
     }
-    initLotteryInfoWithData(data[0]);
+    saveLotteryInfo(data[0]);
   })
 }
 
-let initLotteryInfoWithData = data => {
-  let {
-    id,
-    islucky
-  } = data;
-
-  showCount(id);
-  initPrizeLevel(islucky);
+let saveLotteryInfo = data => {
+  window._prizeInfo = data;
 }
 
 let doLottery = () => {
-
   let data = Object.assign({}, window._userInfo);
   data.rec_time = lib.now();
   $.ajax({
@@ -49,18 +42,19 @@ let doLottery = () => {
       window.location.reload();
       return;
     }
-    initLotteryInfoWithData(data);
+    saveLotteryInfo(data);
   })
 }
 
 const init = () => {
-  loadLotteryInfo();
+  showCount();
+  initPrizeLevel();
 }
 
-const showCount = userIdx => {
+const showCount = () => {
   setTimeout(() => {
     $('.beibei').removeClass('bounceInRight').addClass('pulse').css('animation-iteration-count', 'infinite');
-    startCounter(userIdx);
+    startCounter(window._prizeInfo.id);
   }, 1500)
 }
 
@@ -90,21 +84,9 @@ const show = () => {
 }
 
 
-const initPrizeLevel = prize => {
+const initPrizeLevel = () => {
   showLottery();
-  let prize_level = '';
-  prize = parseInt(prize);
-  // let prize = Math.floor(Math.random() * 11);
-  if (prize < 1) {
-    prize_level = '一等奖';
-  } else if (prize < 3) {
-    prize_level = '二等奖';
-  } else if (prize < 6) {
-    prize_level = '三等奖'
-  } else {
-    prize_level = '谢谢参与';
-  }
-
+  let prize_level = ['谢谢参与', '一等奖', '二等奖', '三等奖'][window._prizeInfo.islucky]
   // 盖住
   lotteryApp.init();
   $('.prize-level').text(prize_level);
@@ -114,5 +96,7 @@ export default {
   init,
   showLottery,
   hideLottery,
-  show
+  show,
+  loadLotteryInfo,
+  initPrizeLevel
 };

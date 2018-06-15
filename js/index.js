@@ -22,15 +22,11 @@ const initFullpage = () => {
         if (!window.fired) {
           return;
         }
-
         page3.show();
 
         if (!lotteryInited) {
-          setTimeout(() => {
-            page3.init();
-            // page3.initCanvas();
-            lotteryInited = true;
-          }, 2100);
+          page3.init();
+          lotteryInited = true;
         } else {
           page3.showLottery();
         }
@@ -46,6 +42,7 @@ const initFullpage = () => {
 $(document).ready(() => {
   window.fired = false;
   weixin.init(function () {
+    page3.loadLotteryInfo();
     initFullpage();
   })
 });

@@ -16,7 +16,6 @@ let init = () => {
   //   })
   //   window.lottery = lottery
   // }
-  console.log('lottery inited;')
   let lottery = new LotteryCard(document.getElementById('lottery'), { // eslint-disable-line
     // cover: img
     percent: 1,
@@ -29,7 +28,9 @@ let init = () => {
 
   })
   lottery.on('end', () => {
-    alert('抽奖完毕');
+    setTimeout(function () {
+      window.location.href = 'http://www.cbpc.ltd/public/topic/2018cbpc3yearsLottery/';
+    }, 3000);
   })
   window.lottery = lottery
 }

@@ -20,7 +20,7 @@ let loadLotteryInfo = () => {
       doLottery();
       return;
     }
-    initLotteryInfoWithData(data);
+    initLotteryInfoWithData(data[0]);
   })
 }
 
@@ -28,7 +28,7 @@ let initLotteryInfoWithData = data => {
   let {
     id,
     islucky
-  } = data[0];
+  } = data;
 
   showCount(id);
   initPrizeLevel(islucky);

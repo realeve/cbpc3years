@@ -1,7 +1,7 @@
-var $ = require('./jquery');
+import $ from './jquery';
 
-function init() {
-  setTimeout(function () {
+const init = () => {
+  setTimeout(() => {
     $('.three').parent().removeClass('bounceInDown').addClass('pulse').css('animation-iteration-count', 'infinite');
     $('.happy').removeClass('bounceInDown').addClass('rubberBand').css({
       'animation-iteration-count': 'infinite',
@@ -9,7 +9,6 @@ function init() {
     });
   }, 2000)
 }
-
-module.exports = {
+export default {
   init
-}
+};

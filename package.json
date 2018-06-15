@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "parcel build --public-url ./",
-    "start": "parcel index.html"
+    "start": "rm -rf dist & parcel index.html"
   },
   "repository": {
     "type": "git",
@@ -17,5 +17,14 @@
   "bugs": {
     "url": "https://github.com/realeve/cbpc3years/issues"
   },
-  "homepage": "https://github.com/realeve/cbpc3years#readme"
+  "homepage": "https://github.com/realeve/cbpc3years#readme",
+  "devDependencies": {
+    "autoprefixer": "^8.6.2",
+    "babel-preset-env": "^1.7.0",
+    "postcss-modules": "^1.1.0",
+    "posthtml-img-autosize": "^0.1.2"
+  },
+  "dependencies": {
+    "weixin-js-sdk": "^1.3.2"
+  }
 }

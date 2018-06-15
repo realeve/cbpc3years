@@ -1,6 +1,5 @@
-let LotteryCard = require('./Lottery/index');
-
-let init = function () {
+import LotteryCard from './Lottery/index';
+let init = () => {
   // var img = new Image()
   // img.src = '../img/placeholder.jpg'
   // img.onload = function () {
@@ -17,17 +16,17 @@ let init = function () {
   //   window.lottery = lottery
   // }
 
-  var lottery = new LotteryCard(document.getElementById('lottery'), { // eslint-disable-line
+  let lottery = new LotteryCard(document.getElementById('lottery'), { // eslint-disable-line
     // cover: img
     percent: 1,
     clearWhenEnd: false
   })
-  lottery.on('start', function () {
+  lottery.on('start', () => {
     // 背景图片
     // lottery.setResult('http://www.cbpc.ltd/public/topic/cbpc3years/scratch_no.png')
 
   })
-  lottery.on('end', function () {
+  lottery.on('end', () => {
     alert('抽奖完毕');
   })
   window.lottery = lottery

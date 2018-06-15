@@ -12,7 +12,7 @@
 // duration = duration of animation in seconds, default 2
 // options = optional object of options (see below)
 
-var CountUp = function (target, startVal, endVal, decimals, duration, options) {
+export default function (target, startVal, endVal, decimals, duration, options) {
 
   var self = this;
   self.version = function () {
@@ -247,5 +247,3 @@ var CountUp = function (target, startVal, endVal, decimals, duration, options) {
   // format startVal on initialization
   if (self.initialize()) self.printValue(self.startVal);
 };
-
-module.exports = CountUp;

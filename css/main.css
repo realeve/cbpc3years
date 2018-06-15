@@ -162,9 +162,9 @@ html {
   position: absolute;
   z-index: -1;
   top: 14px;
-  letter-spacing: 5pt;
+  letter-spacing: 4pt;
   font-family: "SENTYTEA";
-  font-size: 18pt;
+  font-size: 16pt;
   color: #ff363e;
   font-weight: bolder;
 }
@@ -172,6 +172,7 @@ html {
 .lottery .prize-tip {
   text-align: center;
   font-size: 10pt;
+  padding-top: 5px;
 }
 
 .m-ui-scratch {

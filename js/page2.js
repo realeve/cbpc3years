@@ -1,11 +1,11 @@
-var $ = require('./jquery');
-var candle = require('./candle');
+import $ from './jquery';
+import candle from './candle';
 
-function show() {
+const show = () => {
   $('.page2').removeClass('hide');
 }
 
-function initCandle() {
+const initCandle = () => {
   $('.candle').hide();
   candle($("#surface1")[0]);
   candle($("#surface2")[0]);
@@ -13,28 +13,28 @@ function initCandle() {
 }
 
 
-function init() {
+const init = () => {
   show();
-  $('#word').on('click', function () {
+  $('#word').on('click', () => {
     if (window.fired) {
       return;
     }
     $('.section:nth(2)').removeClass('hide');
 
     window.fired = true;
-    $('.candle').each(function (idx, $obj) {
-      setTimeout(function () {
+    $('.candle').each((idx, $obj) => {
+      setTimeout(() => {
         $($obj).show();
       }, 200 + idx * 300);
     })
   })
 
-  setTimeout(function () {
+  setTimeout(() => {
     $('#word').removeClass('bounceInRight').addClass('pulse').css('animation-iteration-count', 'infinite');
   }, 1000);
 }
 
-module.exports = {
+export default {
   show,
   init,
   initCandle

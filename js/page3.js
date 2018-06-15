@@ -1,41 +1,41 @@
-var $ = require('./jquery');
-var CountUp = require('./countUp');
-var lottery = require('./doLottery');
+import $ from './jquery';
+import CountUp from './countUp';
+import lottery from './doLottery';
 
-function init() {
-  setTimeout(function () {
+const init = () => {
+  setTimeout(() => {
     $('.beibei').removeClass('bounceInRight').addClass('pulse').css('animation-iteration-count', 'infinite');
     startCounter(518);
   }, 1500)
 }
 
-function startCounter(endValue) {
-  var options = {  
+const startCounter = endValue => {
+  let options = {  
     useEasing: true,
       useGrouping: true,
       separator: '',
     //   separator: ',',
       decimal: '.',
   };
-  var counter = new CountUp('counter', 0, endValue, 0, 2.5, options);
+  let counter = new CountUp('counter', 0, endValue, 0, 2.5, options);
   counter.start();
 }
 
 
-function showLottery() {
+const showLottery = () => {
   $('.lottery').removeClass('hide');
 }
 
-function hideLottery() {
+const hideLottery = () => {
   $('.lottery').addClass('hide');
 }
 
-function show() {
+const show = () => {
   $('.page3').removeClass('hide');
 }
 
 
-function initPrizeLevel() {
+const initPrizeLevel = () => {
   showLottery();
   let prize_level = '';
   let prize = Math.floor(Math.random() * 11);
@@ -52,7 +52,7 @@ function initPrizeLevel() {
 }
 
 
-module.exports = {
+export default {
   init,
   showLottery,
   hideLottery,

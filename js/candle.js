@@ -1,14 +1,17 @@
-var candle = function (dom) {
-  var surface = dom.getContext("2d");
+export default function (dom) {
+  let canvasWidth;
+  let canvasHeight;
+
+  let surface = dom.getContext("2d");
   surface.scale(1, 1);
 
   // Set Particles
-  var particles = [];
-  var particle_count = 150;
-  for (var i = 0; i < particle_count; i++) {
+  let particles = [];
+  let particle_count = 150;
+  for (let i = 0; i < particle_count; i++) {
     particles.push(new particle());
   }
-  var time = 0;
+  let time = 0;
   // shim layer with setTimeout fallback from Paul Irish
   window.requestAnimFrame = (function () {
     return window.requestAnimationFrame ||
@@ -47,13 +50,13 @@ var candle = function (dom) {
     surface.fillRect(0, 0, canvasWidth, canvasHeight);
     surface.globalCompositeOperation = "lighter";
 
-    for (var i = 0; i < particles.length; i++) {
-      var p = particles[i];
+    for (let i = 0; i < particles.length; i++) {
+      let p = particles[i];
 
       surface.beginPath();
 
       p.opacity = Math.round(p.death / p.life * 100) / 100
-      var gradient = surface.createRadialGradient(p.location.x, p.location.y, 0, p.location.x, p.location.y, p.radius);
+      let gradient = surface.createRadialGradient(p.location.x, p.location.y, 0, p.location.x, p.location.y, p.radius);
       gradient.addColorStop(0, "rgba(" + p.r + ", " + p.g + ", " + p.b + ", " + p.opacity + ")");
       gradient.addColorStop(0.5, "rgba(" + p.r + ", " + p.g + ", " + p.b + ", " + p.opacity + ")");
       gradient.addColorStop(1, "rgba(" + p.r + ", " + p.g + ", " + p.b + ", 0)");
@@ -76,5 +79,3 @@ var candle = function (dom) {
 
   ParticleAnimation();
 }
-
-module.exports = candle;

@@ -1,15 +1,15 @@
-var $ = require('./jquery');
-var page1 = require('./page1');
-var page2 = require('./page2');
-var page3 = require('./page3');
-require('./jquery.fullpage.js');
+import $ from './jquery';
+import page1 from './page1'
+import page2 from './page2'
+import page3 from './page3'
+import './jquery.fullpage.js';
 
-var lotteryInited = false;
+let lotteryInited = false;
 
-function init() {
+const init = () => {
   $('#fullpage').fullpage({
     anchors: ['slide1', 'slide2', 'slide3'],
-    onLeave: function (index, curIndex, direction) {
+    onLeave: (index, curIndex) => {
       if (curIndex != 3) {
         page3.hideLottery();
       }
@@ -24,7 +24,7 @@ function init() {
         page3.show();
 
         if (!lotteryInited) {
-          setTimeout(function () {
+          setTimeout(() => {
             page3.initPrizeLevel();
             page3.initLottery();
             lotteryInited = true;
@@ -36,14 +36,14 @@ function init() {
         page3.init();
       }
     },
-    afterRender: function () {
+    afterRender: () => {
       page1.init();
       page2.initCandle();
     }
   });
 }
 
-$(document).ready(function () {
+$(document).ready(() => {
   window.fired = false;
   init();
 });

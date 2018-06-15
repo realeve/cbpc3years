@@ -1,5 +1,4 @@
 import $ from './jquery';
-
 const init = () => {
   setTimeout(() => {
     $('.three').parent().removeClass('bounceInDown').addClass('pulse').css('animation-iteration-count', 'infinite');

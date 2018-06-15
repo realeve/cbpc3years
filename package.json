@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "parcel build --public-url ./",
-    "start": "rm -rf dist & parcel index.html"
+    "build": "rm -rf dist & parcel build --public-url ./",
+    "start": "parcel index.html"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,9 @@
     "posthtml-img-autosize": "^0.1.2"
   },
   "dependencies": {
+    "dayjs": "^1.6.9",
+    "qs": "^6.5.2",
+    "vue-resource": "^1.5.1",
     "weixin-js-sdk": "^1.3.2"
   }
 }

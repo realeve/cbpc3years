@@ -2,11 +2,13 @@ import $ from './jquery';
 import page1 from './page1'
 import page2 from './page2'
 import page3 from './page3'
+import weixin from './weixin';
+
 import './jquery.fullpage.js';
 
 let lotteryInited = false;
 
-const init = () => {
+const initFullpage = () => {
   $('#fullpage').fullpage({
     anchors: ['slide1', 'slide2', 'slide3'],
     onLeave: (index, curIndex) => {
@@ -25,15 +27,13 @@ const init = () => {
 
         if (!lotteryInited) {
           setTimeout(() => {
-            page3.initPrizeLevel();
-            page3.initLottery();
+            page3.init();
+            // page3.initCanvas();
             lotteryInited = true;
           }, 2100);
         } else {
           page3.showLottery();
         }
-
-        page3.init();
       }
     },
     afterRender: () => {
@@ -45,5 +45,7 @@ const init = () => {
 
 $(document).ready(() => {
   window.fired = false;
-  init();
+  weixin.init(function () {
+    initFullpage();
+  })
 });

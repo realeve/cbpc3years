@@ -39,16 +39,12 @@ const getWXInfo = () => {
   let data = {
     code: sport.code
   };
-  console.log('code')
-  console.log(data);
   ajax({
     url: sport.cdnUrl + "getUserInfo",
     data,
     dataType: "jsonp",
     callback: "JsonCallback",
   }).done(data => {
-    console.log('userInfo')
-    console.log(data);
     if (Reflect.get(data, "nickname")) {
       localStorage.setItem("wx_userinfo", JSON.stringify(data));
     }
@@ -145,8 +141,6 @@ const wxPermissionInit = () => {
     callback: "JsonCallback",
     async: false
   }).done(data => {
-    console.log('signature:')
-    console.log(data)
     wxReady(data);
     initWxShare();
     recordReadNum();
@@ -164,8 +158,8 @@ const init = (callback) => {
   // 全局记录callback;
   sport.callback = callback;
   window.title = sport.title;
-  wxInit();
-  return;
+  // wxInit();
+  // return;
 
   if (NODE_ENV == "development") {
     window._userInfo = {

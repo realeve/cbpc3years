@@ -143,8 +143,10 @@ class LotteryCard extends Events {
     this.ctx.fill()
 
     // 计算已经刮掉的面积
-    if (this.options.clearWhenEnd && this.scratchPercent() >= this.options.percent) {
-      this.ctx.clearRect(0, 0, this.width, this.height)
+    if (this.scratchPercent() >= this.options.percent) {
+      if (this.options.clearWhenEnd) {
+        this.ctx.clearRect(0, 0, this.width, this.height)
+      }
       this._state = 'end'
       this.trigger('end')
     }

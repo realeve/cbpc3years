@@ -30,7 +30,7 @@ let init = () => {
   lottery.on('end', () => {
     setTimeout(function () {
       window.location.href = 'http://www.cbpc.ltd/public/topic/2018cbpc3yearsLottery/';
-    }, 3000);
+    }, 2000);
   })
   window.lottery = lottery
 }

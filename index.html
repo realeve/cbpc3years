@@ -27,8 +27,14 @@
 </head>
 
 <body>
+  <div class="lg-trailer lottery fadeIn animated hide">
+    <div class="center">
+      <label class="prize-level">一等奖</label>
+      <canvas class="m-ui-scratch" id="lottery"></canvas>
+    </div>
+    <p class="prize-tip">刮开涂层查看中奖信息</p>
+  </div>
   <div id="fullpage">
-
     <div class="section">
       <div class="lg-container  page1">
         <div class="lg-trailer fadeIn animated band">
@@ -36,7 +42,6 @@
             <img class="lg-component-img" src="./img/band.png">
           </div>
         </div>
-
         <div class="lg-trailer bounceInDown animated happy center">
           <div class="lg-surface lg-surface-image" style="width: 220px;">
             <img class="lg-component-img" src="./img/happy.png">
@@ -49,7 +54,7 @@
           </div>
         </div>
 
-        <div class="lg-trailer bounceInDown animated three-years center">
+        <div class="lg-trailer bounceInDown animated three-years center" style="top:230px;">
           <div class="lg-surface lg-surface-image" style="width: 375px;">
             <img class="lg-component-img" src="./img/3years.png">
           </div>
@@ -80,13 +85,13 @@
           </div>
         </div>
         <div class="lg-trailer bounceInDown animated cake-container">
-          <div class="candle">
+          <div class="candle fadeInUp animated">
             <canvas id="surface1"></canvas>
           </div>
-          <div class="candle">
+          <div class="candle  fadeInUp animated">
             <canvas id="surface2"></canvas>
           </div>
-          <div class="candle">
+          <div class="candle  fadeInUp animated">
             <canvas id="surface3"></canvas>
           </div>
           <div class="lg-surface lg-surface-image cake" style="width: 375px;">
@@ -137,9 +142,9 @@
     </div>
   </div>
 
-  <audio class="lg-component-audio-core" loop="true" autoplay="true">
+  <!-- <audio class="lg-component-audio-core" loop="true" autoplay="true">
     <source src="http://boscdn.bpc.baidu.com/v1/legend/1484208841839.512356.Proud Of You (1).mp3">
-  </audio>
+  </audio> -->
   <script src="./js/index.js"></script>
 </body>
 

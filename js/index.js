@@ -1,91 +1,49 @@
 var $ = require('./jquery');
-var CountUp = require('./countUp');
-var candle = require('./candle');
+var page1 = require('./page1');
+var page2 = require('./page2');
+var page3 = require('./page3');
 require('./jquery.fullpage.js');
 
+var lotteryInited = false;
 
-var fired = false;
-
-function initEvent() {
-  $('#word').on('click', function () {
-    if (fired) {
-      return;
-    }
-    $('.section:nth(2)').removeClass('hide');
-
-    fired = true;
-    $('.candle').each(function (idx, $obj) {
-      setTimeout(function () {
-        $($obj).show();
-      }, 200 + idx * 300);
-    })
-  })
-
-  setTimeout(function () {
-    $('#word').removeClass('bounceInRight').addClass('pulse').css('animation-iteration-count', 'infinite');
-  }, 1000);
-}
-
-function initCandle() {
-  $('.candle').hide();
-  candle($("#surface1")[0]);
-  candle($("#surface2")[0]);
-  candle($("#surface3")[0]);
-}
-
-function initPage1() {
-  setTimeout(function () {
-    $('.three').parent().removeClass('bounceInDown').addClass('pulse').css('animation-iteration-count', 'infinite');
-    $('.happy').removeClass('bounceInDown').addClass('rubberBand').css({
-      'animation-iteration-count': 'infinite',
-      'animation-duration': '2s'
-    });
-  }, 2000)
-}
-
-function initPage3() {
-  setTimeout(function () {
-    $('.beibei').removeClass('bounceInRight').addClass('pulse').css('animation-iteration-count', 'infinite');
-    startCounter(518);
-  }, 1500)
-}
-
-function startCounter(endValue) {
-  var options = {  
-    useEasing: true,
-      useGrouping: true,
-      separator: '',
-    //   separator: ',',
-      decimal: '.',
-  };
-  var counter = new CountUp('counter', 0, endValue, 0, 2.5, options);
-  counter.start();
-}
-
-function initFullpage() {
+function init() {
   $('#fullpage').fullpage({
     anchors: ['slide1', 'slide2', 'slide3'],
     onLeave: function (index, curIndex, direction) {
+      if (curIndex != 3) {
+        page3.hideLottery();
+      }
 
-      var loadedSlide = $(this);
       if (curIndex == 2) {
-        $('.page2').removeClass('hide');
-        initEvent();
+        page2.init();
       } else if (curIndex == 3) {
-        if (!fired) {
+        if (!window.fired) {
           return;
         }
-        $('.page3').removeClass('hide');
-        initPage3();
+
+        page3.show();
+
+        if (!lotteryInited) {
+          setTimeout(function () {
+            page3.initPrizeLevel();
+            page3.initLottery();
+            lotteryInited = true;
+          }, 2100);
+        } else {
+          page3.showLottery();
+        }
+
+        page3.init();
       }
     },
     afterRender: function () {
-      initCandle();
-      initPage1()
-    },
+      page1.init();
+      page2.initCandle();
+    }
   });
 }
 
 $(document).ready(function () {
-  initFullpage();
+  window.fired = false;
+  init();
 });

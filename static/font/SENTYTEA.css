@@ -1,12 +1,14 @@
 @font-face {
     font-family: "SENTYTEA";
-    src: url("SENTYTEA.eot");
-    /* IE9 */
+    src: url("SENTYTEA.eot"); /* IE9 */
     src: url("SENTYTEA.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    
     url("SENTYTEA.woff") format("woff"), /* chrome、firefox */
     url("SENTYTEA.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+ */
-    url("SENTYTEA.svg#SENTYTEA") format("svg");
-    /* iOS 4.1- */
+    
+    url("SENTYTEA.svg#SENTYTEA") format("svg"); /* iOS 4.1- */
     font-style: normal;
-    font-weight: bolder;
+    font-weight: normal;
 }
+
+

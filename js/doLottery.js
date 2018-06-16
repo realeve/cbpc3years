@@ -18,7 +18,7 @@ let init = () => {
   // }
   let lottery = new LotteryCard(document.getElementById('lottery'), { // eslint-disable-line
     // cover: img
-    percent: 1,
+    percent: 30,
     clearWhenEnd: false
   })
 

@@ -158,27 +158,27 @@ const init = (callback) => {
   // 全局记录callback;
   sport.callback = callback;
   window.title = sport.title;
-  // wxInit();
+  wxInit();
+
   // return;
+  // if (NODE_ENV == "development") {
+  //   window._userInfo = {
+  //     openid: "oW0w1v4qftC8xUP3q-MPIHtXB7hI",
+  //     nickname: "宾不厌诈",
+  //     sex: 1,
+  //     language: "zh_CN",
+  //     city: "成都",
+  //     province: "四川",
+  //     country: "中国",
+  //     headimgurl: "http://wx.qlogo.cn/mmhead/Q3auHgzwzM7RSAYiaxiaC1lOZYicWic9YZKEFJ2TKEfh3pFJibLvf7IxdLQ/0",
+  //     privilege: []
+  //   };
 
-  if (NODE_ENV == "development") {
-    window._userInfo = {
-      openid: "oW0w1v4qftC8xUP3q-MPIHtXB7hI",
-      nickname: "宾不厌诈",
-      sex: 1,
-      language: "zh_CN",
-      city: "成都",
-      province: "四川",
-      country: "中国",
-      headimgurl: "http://wx.qlogo.cn/mmhead/Q3auHgzwzM7RSAYiaxiaC1lOZYicWic9YZKEFJ2TKEfh3pFJibLvf7IxdLQ/0",
-      privilege: []
-    };
-
-    callback();
-  } else {
-    // 正式环境微信载入
-    wxInit();
-  }
+  //   callback();
+  // } else {
+  //   // 正式环境微信载入
+  //   wxInit();
+  // }
 }
 
 export default {

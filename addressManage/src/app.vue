@@ -191,7 +191,7 @@ export default {
     // 开发模式下，初始化值
     if (process.env.NODE_ENV == "development") {
       this.userInfo = {
-        openid: "oW0w1v4qftC8xUP3q-MPIHtXB7hI",
+        openid: "oW0w1v4qftC8xUP3q-MPIHtXB7hI", // "oW0w1v8dHC5eMf4gT4x3C7cCQ6rI", //
         nickname: "宾不厌诈",
         sex: 1,
         language: "zh_CN",

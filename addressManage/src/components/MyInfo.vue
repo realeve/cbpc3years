@@ -2,7 +2,7 @@
   <div class="home">
     <div class="content">
       <msg :title="title" :description="desc" :icon="icon"></msg>
-      <template v-if="isLucky">
+      <template v-if="isLucky>0">
         <form-preview header-label="用户信息预览" :header-value="username+'(收)'" :body-items="list" />
         <div class="box">
           <group title="基本信息">
@@ -98,8 +98,9 @@ export default {
       ];
     }
   },
-  watch: {
-    isLucky(val) {
+  methods: {
+    handleLuckyInfo() {
+      let val = this.isLucky;
       if (val == 0) {
         this.viewLucky();
         return;
@@ -108,9 +109,7 @@ export default {
       this.title = "恭喜您获得" + prize_level;
       this.desc =
         "恭喜您成为本次活动的幸运用户，请填写个人收件信息以方便我们邮寄，如果信息填写不完整，视为自动放弃中奖资格。";
-    }
-  },
-  methods: {
+    },
     now() {
       return dateFormat(new Date(), "YYYY-MM-DD HH:mm:ss");
     },
@@ -149,6 +148,7 @@ export default {
         .then(res => {
           let obj = res.data[0];
           this.isLucky = parseInt(obj.islucky, 10);
+          this.handleLuckyInfo();
         });
     },
     loadAddress() {
@@ -180,6 +180,7 @@ export default {
           this.addressArr = address.split(" ");
           this.address_detail = address_detail;
           this.isLucky = prize_level;
+          this.handleLuckyInfo();
         });
     },
     viewHome() {
@@ -190,7 +191,13 @@ export default {
     },
     init() {
       let address = window.localStorage.getItem("user_address");
-      this.addressArr = JSON.parse(address);
+      if (address != null) {
+        let addr = JSON.parse(address);
+        if (addr.length && addr[0].length) {
+          this.addressArr = addr;
+        }
+      }
+
       document.title = this.sport.name;
       this.loadAddress();
     }

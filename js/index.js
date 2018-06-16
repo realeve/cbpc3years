@@ -6,7 +6,6 @@ import weixin from './weixin';
 
 import './jquery.fullpage.js';
 import attachFastClick from 'fastclick';
-// var  = require('fastclick');
 attachFastClick(document.body);
 
 let lotteryInited = false;

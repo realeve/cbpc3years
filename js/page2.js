@@ -1,5 +1,6 @@
 import $ from './jquery';
 import candle from './candle';
+import './jquery.fullpage.js';
 
 const show = () => {
   $('.page2').removeClass('hide');
@@ -12,6 +13,9 @@ const initCandle = () => {
   candle($("#surface3")[0]);
 }
 
+const moveToLottery = () => {
+  $.fn.fullpage.moveSectionDown();
+}
 
 const init = () => {
   show();
@@ -26,6 +30,9 @@ const init = () => {
       setTimeout(() => {
         $($obj).show();
       }, 200 + idx * 300);
+      setTimeout(() => {
+        moveToLottery()
+      }, 3500);
     })
   })
 
